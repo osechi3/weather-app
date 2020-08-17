@@ -1,27 +1,31 @@
 <template>
   <div id="app">
-    <input v-model="city" type="text">
-    <button type="button" @click="getWeather">Get Weather</button>
+    <app-search-block @get-weather-btn-clicked="getWeather($event)"></app-search-block>
   </div>
 </template>
 
 <script>
+import SearchBlock from './components/SearchBlock'
+
 export default {
   name: 'App',
+  components: {
+    appSearchBlock: SearchBlock
+  },
+
   data () {
     return {
-      city: 'California',
       currentWeather: {}
     }
   },
 
   methods: {
-    async getWeather () {
+    async getWeather (city) {
       try {
         const baseURL = 'https://api.openweathermap.org/data/2.5/weather'
         const APIKey = '4ef4b2a2a7bdeffc0eb01cf68ffe665e'
 
-        const request = await fetch(`${baseURL}?q=${this.city}&appid=${APIKey}`, { mode: 'cors' })
+        const request = await fetch(`${baseURL}?q=${city}&appid=${APIKey}`, { mode: 'cors' })
         const requestData = await request.json()
         console.log(request)
         console.log(requestData)
