@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <app-search-block @get-weather-btn-clicked="getWeather($event)"></app-search-block>
-    <app-weather-card></app-weather-card>
+    <app-weather-card
+      :currentWeather="currentWeather"
+      v-if="Object.keys(currentWeather).length !== 0">
+    </app-weather-card>
   </div>
 </template>
 
@@ -39,7 +42,8 @@ export default {
           temperatureKelvin: requestData.main.temp,
           feelsLike: requestData.main.feels_like, // Can I write it like this?
           timezoneShift: requestData.timezone,
-          weatherDescription: requestData.weather[0]
+          weatherDescription: requestData.weather[0],
+          iconURL: `http://openweathermap.org/img/wn/${requestData.weather[0].icon}.png`
         }
         console.log(this.currentWeather)
       } catch (error) {

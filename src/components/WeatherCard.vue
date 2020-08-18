@@ -1,30 +1,35 @@
 <template>
   <div id="container">
     <div id="header">
-      <h1>California</h1>
+      <h1>{{ currentWeather.location }}</h1>
     </div>
     <div id="body">
       <div>
-        <img src="#" alt="">
-        <p>Description</p>
+        <img :src="currentWeather.iconURL" alt="">
+        <p>{{ currentWeather.weatherDescription.main }}</p>
       </div>
       <div>
-        <p>Temperature</p>
+        <p>{{ currentWeather.temperatureKelvin }}</p>
         <button>C</button>
         <button>F</button>
       </div>
-      <p>Feels like:</p>
+      <p>Feels like: {{ currentWeather.feelsLike }}</p>
       <div>
-        <p>Humidity:</p>
-        <p>Wind:</p>
+        <p>Humidity: {{ currentWeather.humidity }}</p>
+        <p>Wind: {{ currentWeather.windSpeed }}</p>
       </div>
-      <p>Time:</p>
+      <p>Time: {{ currentWeather.timezoneShift }}</p>
     </div>
   </div>
 </template>
 <script>
 export default {
-
+  props: {
+    currentWeather: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>
 <style scoped>
