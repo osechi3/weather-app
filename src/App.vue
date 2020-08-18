@@ -35,7 +35,8 @@ export default {
           windSpeed: requestData.wind.speed,
           temperatureKelvin: requestData.main.temp,
           feelsLike: requestData.main.feels_like, // Can I write it like this?
-          timezoneShift: requestData.timezone
+          timezoneShift: requestData.timezone,
+          weatherDescription: requestData.weather[0]
         }
         console.log(this.currentWeather)
       } catch (error) {
