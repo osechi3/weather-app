@@ -15,10 +15,9 @@
       </div>
       <p>Feels like: {{ currentWeather.feelsLike }}</p>
       <div>
-        <p>Humidity: {{ currentWeather.humidity }}</p>
-        <p>Wind: {{ currentWeather.windSpeed }}</p>
+        <p>Humidity: {{ currentWeather.humidity }}%</p>
+        <p>Wind: {{ currentWeather.windSpeed }} m/s</p>
       </div>
-      <p>Time: {{ currentWeather.timezoneShift }}</p>
     </div>
   </div>
 </template>
