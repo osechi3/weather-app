@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <app-search-block @get-weather-btn-clicked="getWeather($event)"></app-search-block>
+    <app-weather-card></app-weather-card>
   </div>
 </template>
 
 <script>
 import SearchBlock from './components/SearchBlock'
+import WeatherCard from './components/WeatherCard'
 
 export default {
   name: 'App',
   components: {
-    appSearchBlock: SearchBlock
+    appSearchBlock: SearchBlock,
+    appWeatherCard: WeatherCard
   },
 
   data () {
