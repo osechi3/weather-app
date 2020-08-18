@@ -10,14 +10,15 @@
           <p id="weather-description">{{ currentWeather.weatherDescription.main }}</p>
         </div>
         <div class="group-temperature">
-          <p v-if="isCelsius" class="temperature-number">{{ temperatureCelsius }}°C</p>
-          <p v-else class="temperature-number">{{ temperatureFahrenheit }}°F</p>
+          <p v-if="isCelsius" class="temperature-number">{{ this.currentWeather.temperatureKelvin | toCelsius }}</p>
+          <p v-else class="temperature-number">{{ this.currentWeather.temperatureKelvin | toFahrenheit }}</p>
           <div class="group-btn">
             <button class="btns-temperature" type="button" @click="(isCelsius = true)">°C</button>
             <button class="btns-temperature" type="button" @click="(isCelsius = false)">°F</button>
           </div>
         </div>
-        <p class="feels-like">Feels like: {{ currentWeather.feelsLike }}</p>
+        <p v-if="isCelsius" class="feels-like">Feels like: {{ currentWeather.feelsLike | toCelsius }}</p>
+        <p v-else class="feels-like">Feels like: {{ currentWeather.feelsLike | toFahrenheit }}</p>
       </div>
       <div id="block-bottom">
         <div>
@@ -30,6 +31,15 @@
 </template>
 <script>
 export default {
+  filters: {
+    toCelsius (value) {
+      return Math.round(value - 273.15) + '°C'
+    },
+    toFahrenheit (value) {
+      return Math.round(value * 1.8 - 459.67) + '°F'
+    }
+  },
+
   props: {
     currentWeather: {
       type: Object,
@@ -40,15 +50,6 @@ export default {
   data () {
     return {
       isCelsius: true
-    }
-  },
-
-  computed: {
-    temperatureCelsius () {
-      return Math.round(this.currentWeather.temperatureKelvin - 273.15)
-    },
-    temperatureFahrenheit () {
-      return Math.round(this.currentWeather.temperatureKelvin * 1.8 - 459.67)
     }
   }
 }
