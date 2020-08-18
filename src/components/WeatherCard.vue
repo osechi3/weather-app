@@ -10,10 +10,11 @@
           <p id="weather-description">{{ currentWeather.weatherDescription.main }}</p>
         </div>
         <div class="group-temperature">
-          <p class="temperature-number">{{ temperatureCelsius }}°C</p>
+          <p v-if="isCelsius" class="temperature-number">{{ temperatureCelsius }}°C</p>
+          <p v-else class="temperature-number">{{ temperatureFahrenheit }}°F</p>
           <div class="group-btn">
-            <button class="btns-temperature">°C</button>
-            <button class="btns-temperature">°F</button>
+            <button class="btns-temperature" type="button" @click="(isCelsius = true)">°C</button>
+            <button class="btns-temperature" type="button" @click="(isCelsius = false)">°F</button>
           </div>
         </div>
         <p class="feels-like">Feels like: {{ currentWeather.feelsLike }}</p>
@@ -33,6 +34,12 @@ export default {
     currentWeather: {
       type: Object,
       required: true
+    }
+  },
+
+  data () {
+    return {
+      isCelsius: true
     }
   },
 
