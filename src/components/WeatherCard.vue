@@ -9,7 +9,7 @@
         <p>{{ currentWeather.weatherDescription.main }}</p>
       </div>
       <div>
-        <p>{{ currentWeather.temperatureKelvin }}</p>
+        <p>{{ temperatureCelsius }} {{ temperatureFahrenheit }}</p>
         <button>C</button>
         <button>F</button>
       </div>
@@ -28,6 +28,15 @@ export default {
     currentWeather: {
       type: Object,
       required: true
+    }
+  },
+
+  computed: {
+    temperatureCelsius () {
+      return Math.round(this.currentWeather.temperatureKelvin - 273.15)
+    },
+    temperatureFahrenheit () {
+      return Math.round(this.currentWeather.temperatureKelvin * 1.8 - 459.67)
     }
   }
 }
