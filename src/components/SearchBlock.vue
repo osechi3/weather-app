@@ -1,21 +1,58 @@
 <template>
-  <div id="container">
-    <input
-      id="input-field"
-      v-model="city"
-      type="text">
-    <button
-      id="btn-search"
-      type="button"
-      @click="$emit('get-weather-btn-clicked', city)">Search
-    </button>
+  <div>
+    <div id="container">
+      <input
+        id="input-field"
+        v-model="city"
+        type="text">
+      <button
+        id="btn-search"
+        type="button"
+        @click="sendData">Search
+      </button>
+    </div>
+    <p
+      v-if="$v.city.$invalid && $v.city.$dirty && isClicked"
+      class="error-msg">The search field must not be empty
+    </p>
   </div>
 </template>
 <script>
+import { required } from 'vuelidate/lib/validators'
+
 export default {
   data () {
     return {
-      city: 'California'
+      city: 'California',
+      isClicked: false
+    }
+  },
+
+  methods: {
+    sendData () {
+      if (this.validate()) {
+        this.$emit('get-weather-btn-clicked', this.city)
+      } else {
+        this.showErrorMessage()
+      }
+    },
+
+    validate () {
+      this.$v.$touch()
+      return !this.$v.$invalid
+    },
+
+    showErrorMessage () {
+      this.isClicked = true
+      setTimeout(() => {
+        this.isClicked = false
+      }, 3000)
+    }
+  },
+
+  validations: {
+    city: {
+      required
     }
   }
 }
@@ -54,5 +91,19 @@ export default {
   #btn-search:hover {
     background-color: #E0E0E1;
     color: black;
+  }
+
+  .error-msg {
+    position: absolute;
+    top: 121px;
+    left: 360px;
+
+    width: 655px;
+    padding: 10px;
+
+    color: white;
+    font-size: 21px;
+
+    background-color: #25283D;
   }
 </style>
