@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <img id="background-img" :src="backgroundImg" alt="">
-    <app-search-block @get-weather-btn-clicked="getWeather($event)"></app-search-block>
+    <app-search-block
+      :isNotFound="isNotFound"
+      @get-weather-btn-clicked="getWeather($event)">
+    </app-search-block>
     <app-weather-card
       :currentWeather="currentWeather"
       v-if="Object.keys(currentWeather).length !== 0">
@@ -32,7 +35,9 @@ export default {
         snow: images[3],
         atmosphere: images[4],
         thunder: images[5]
-      }
+      },
+
+      isNotFound: false
     }
   },
 
@@ -62,8 +67,19 @@ export default {
         const APIKey = '4ef4b2a2a7bdeffc0eb01cf68ffe665e'
 
         const request = await fetch(`${baseURL}?q=${city}&appid=${APIKey}`, { mode: 'cors' })
-        const requestData = await request.json()
         console.log(request)
+
+        if (request.status === 404) {
+          this.isNotFound = true
+          console.log(this.isNotFound)
+          return
+        } else {
+          this.isNotFound = false
+        }
+
+        const requestData = await request.json()
+
+        console.log(this.isNotFound)
         console.log(requestData)
 
         this.currentWeather = {

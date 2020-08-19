@@ -20,16 +20,34 @@
       v-if="!$v.city.noSymbols && $v.city.$dirty && isClicked && $v.city.required"
       class="error-msg">The city can contain only letters.
     </p>
+    <p
+      v-if="isNotFound && isClickedAsync"
+      class="error-msg">The city was not found.
+    </p>
   </div>
 </template>
 <script>
 import { required } from 'vuelidate/lib/validators'
 
 export default {
+  props: {
+    isNotFound: Boolean
+  },
+
   data () {
     return {
       city: 'California',
-      isClicked: false
+      isClicked: false,
+      isClickedAsync: false
+    }
+  },
+
+  watch: {
+    isNotFound () {
+      this.isClickedAsync = true
+      setTimeout(() => {
+        this.isClickedAsync = false
+      }, 3700)
     }
   },
 
