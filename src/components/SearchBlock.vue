@@ -18,7 +18,7 @@
     </p>
     <p
       v-if="!$v.city.noSymbols && $v.city.$dirty && isClicked && $v.city.required"
-      class="error-msg">The city can contain only letters.
+      class="error-msg">The city can contain only letters of the english alphabet and germanic umlauts.
     </p>
     <p
       v-if="isNotFound && isClickedAsync"
@@ -124,6 +124,7 @@ export default {
     position: absolute;
     top: 121px;
     left: 360px;
+    z-index: 1;
 
     width: 655px;
     padding: 10px;
