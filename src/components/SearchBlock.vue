@@ -26,10 +26,11 @@ export default {
     justify-content: center;
 
     width: 800px;
-    margin: 60px auto 0 auto;
+    margin: 65px auto 0 auto;
 
     background-color: white;
     opacity: .8;
+    border: 4px solid;
   }
   #input-field {
     width: 670px;
