@@ -12,8 +12,12 @@
       </button>
     </div>
     <p
-      v-if="$v.city.$invalid && $v.city.$dirty && isClicked"
-      class="error-msg">The search field must not be empty
+      v-if="!$v.city.required && $v.city.$dirty && isClicked"
+      class="error-msg">The search field must not be empty.
+    </p>
+    <p
+      v-if="!$v.city.noSymbols && $v.city.$dirty && isClicked && $v.city.required"
+      class="error-msg">The city can contain only letters.
     </p>
   </div>
 </template>
@@ -46,13 +50,17 @@ export default {
       this.isClicked = true
       setTimeout(() => {
         this.isClicked = false
-      }, 3000)
+      }, 3700)
     }
   },
 
   validations: {
     city: {
-      required
+      required,
+      noSymbols: value => {
+        const expression = /^[a-zA-ZäöüßÄÖÜ\s]+$/g
+        return expression.test(value)
+      }
     }
   }
 }
