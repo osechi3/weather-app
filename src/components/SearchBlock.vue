@@ -4,7 +4,8 @@
       <input
         id="input-field"
         v-model="city"
-        type="text">
+        type="text"
+        placeholder="Enter the city">
       <button
         id="btn-search"
         type="button"
