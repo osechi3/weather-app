@@ -83,8 +83,11 @@ export default {
       const localOffsetUTCMs = new Date().getTimezoneOffset() * 60 * 1000
       const currentUTCTime = currentLocalTimeMs + localOffsetUTCMs
       const desiredTime = currentUTCTime + this.currentWeather.timezoneShift * 1000
-      const desiredTimeHours = new Date(desiredTime).getHours()
-      const desiredTimeMinutes = new Date(desiredTime).getMinutes()
+      let desiredTimeHours = new Date(desiredTime).getHours()
+      let desiredTimeMinutes = new Date(desiredTime).getMinutes()
+
+      if (desiredTimeHours < 10) (desiredTimeHours = '0' + desiredTimeHours)
+      if (desiredTimeMinutes < 10) (desiredTimeMinutes = '0' + desiredTimeMinutes)
 
       console.log(desiredTimeHours + ':' + desiredTimeMinutes)
       return desiredTimeHours + ':' + desiredTimeMinutes
