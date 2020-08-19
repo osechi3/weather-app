@@ -91,6 +91,8 @@ export default {
 body {
   margin: 0;
   overflow-y: hidden;
+  background: rgb(172,210,215);
+  background: radial-gradient(circle, rgba(172,210,215,1) 53%, rgba(44,202,223,1) 80%);
 }
 #app {
   overflow: hidden;
