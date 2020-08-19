@@ -12,6 +12,7 @@
 <script>
 import SearchBlock from './components/SearchBlock'
 import WeatherCard from './components/WeatherCard'
+import images from './assets/background-images-export.js'
 
 export default {
   name: 'App',
@@ -25,12 +26,12 @@ export default {
       currentWeather: {},
       weatherCondition: '',
       backgroundImages: {
-        default: 'https://giffiles.alphacoders.com/209/209343.gif',
-        clear: 'https://thumbs.gfycat.com/FrankCleverGrebe-size_restricted.gif',
-        rain: 'https://cdn.lowgif.com/full/0c035a373bb63aef-.gif',
-        snow: 'https://thumbs.gfycat.com/FluidSnappyFox-size_restricted.gif',
-        atmosphere: 'https://cdna.artstation.com/p/assets/images/images/010/644/324/original/daniel-riise-windy-hill.gif?1525465125',
-        thunder: 'https://cdna.artstation.com/p/assets/images/images/017/663/258/original/anastasia-kozheko-thundery.gif?1556866811'
+        default: images[0],
+        clear: images[1],
+        rain: images[2],
+        snow: images[3],
+        atmosphere: images[4],
+        thunder: images[5]
       }
     }
   },
@@ -70,7 +71,7 @@ export default {
           humidity: requestData.main.humidity,
           windSpeed: requestData.wind.speed,
           temperatureKelvin: requestData.main.temp,
-          feelsLike: requestData.main.feels_like, // Can I write it like this?
+          feelsLike: requestData.main.feels_like,
           timezoneShift: requestData.timezone,
           weatherDescription: requestData.weather[0],
           iconURL: `http://openweathermap.org/img/wn/${requestData.weather[0].icon}@2x.png`
