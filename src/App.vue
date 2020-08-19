@@ -3,6 +3,7 @@
     <img id="background-img" :src="backgroundImg" alt="">
     <app-search-block
       :isNotFound="isNotFound"
+      :isUnknownError="isUnknownError"
       @get-weather-btn-clicked="getWeather($event)">
     </app-search-block>
     <app-weather-card
@@ -37,7 +38,8 @@ export default {
         thunder: images[5]
       },
 
-      isNotFound: false
+      isNotFound: false,
+      isUnknownError: false
     }
   },
 
@@ -75,6 +77,13 @@ export default {
           return
         } else {
           this.isNotFound = false
+        }
+
+        if (!request.ok) {
+          this.isUnknownError = true
+          return
+        } else {
+          this.isUnknownError = false
         }
 
         const requestData = await request.json()

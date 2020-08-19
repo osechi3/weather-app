@@ -12,6 +12,8 @@
         @click="sendData">Search
       </button>
     </div>
+
+    <!-- Error messages -->
     <p
       v-if="!$v.city.required && $v.city.$dirty && isClicked"
       class="error-msg">The search field must not be empty.
@@ -24,6 +26,10 @@
       v-if="isNotFound && isClickedAsync"
       class="error-msg">The city was not found.
     </p>
+    <p
+      v-if="isUnknownError && isClickedAsync"
+      class="error-msg">There was an unknown error.
+    </p>
   </div>
 </template>
 <script>
@@ -31,7 +37,8 @@ import { required } from 'vuelidate/lib/validators'
 
 export default {
   props: {
-    isNotFound: Boolean
+    isNotFound: Boolean,
+    isUnknownError: Boolean
   },
 
   data () {
@@ -44,10 +51,10 @@ export default {
 
   watch: {
     isNotFound () {
-      this.isClickedAsync = true
-      setTimeout(() => {
-        this.isClickedAsync = false
-      }, 3700)
+      this.showErrorMessageAsync()
+    },
+    isUnknownError () {
+      this.showErrorMessageAsync()
     }
   },
 
@@ -69,6 +76,13 @@ export default {
       this.isClicked = true
       setTimeout(() => {
         this.isClicked = false
+      }, 3700)
+    },
+
+    showErrorMessageAsync () {
+      this.isClickedAsync = true
+      setTimeout(() => {
+        this.isClickedAsync = false
       }, 3700)
     }
   },
