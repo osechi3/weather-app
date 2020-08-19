@@ -85,6 +85,7 @@ export default {
 
     background-color: white;
     opacity: .8;
+    border: 3px solid #2C8C99;
   }
   #header {
     margin: 0;
