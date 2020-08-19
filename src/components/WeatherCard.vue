@@ -41,6 +41,10 @@
         </p>
       </div>
       <div id="block-bottom">
+        <div class="group-time">
+          <label>Time:</label>
+          <p id="current-time">{{ currentTime }}</p>
+        </div>
         <div>
           <p>Humidity: {{ currentWeather.humidity }}%</p>
           <p>Wind: {{ currentWeather.windSpeed }} m/s</p>
@@ -70,6 +74,20 @@ export default {
   data () {
     return {
       isCelsius: true
+    }
+  },
+
+  computed: {
+    currentTime () {
+      const currentLocalTimeMs = new Date().getTime()
+      const localOffsetUTCMs = new Date().getTimezoneOffset() * 60 * 1000
+      const currentUTCTime = currentLocalTimeMs + localOffsetUTCMs
+      const desiredTime = currentUTCTime + this.currentWeather.timezoneShift * 1000
+      const desiredTimeHours = new Date(desiredTime).getHours()
+      const desiredTimeMinutes = new Date(desiredTime).getMinutes()
+
+      console.log(desiredTimeHours + ':' + desiredTimeMinutes)
+      return desiredTimeHours + ':' + desiredTimeMinutes
     }
   }
 }
@@ -159,10 +177,21 @@ export default {
 
   #block-bottom {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 
     margin-right: 15px;
 
     font-size: 18px;
+  }
+  .group-time {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  #current-time {
+    margin: 0 0 7px 10px;
+
+    font-size: 32px;
   }
 </style>
