@@ -82,11 +82,11 @@ export default {
         const APIKey = '4ef4b2a2a7bdeffc0eb01cf68ffe665e'
 
         const request = await fetch(`${baseURL}?q=${city}&appid=${APIKey}`, { mode: 'cors' })
-        console.log(request)
+        // console.log(request)
 
         if (request.status === 404) {
           this.isNotFound = true
-          console.log(this.isNotFound)
+          // console.log(this.isNotFound)
           return
         } else {
           this.isNotFound = false
@@ -101,8 +101,8 @@ export default {
 
         const requestData = await request.json()
 
-        console.log(this.isNotFound)
-        console.log(requestData)
+        // console.log(this.isNotFound)
+        // console.log(requestData)
 
         this.currentWeather = {
           location: requestData.name,
@@ -118,7 +118,7 @@ export default {
         // to change the background accordingly
         this.weatherCondition = requestData.weather[0].main
 
-        console.log(this.currentWeather)
+        // console.log(this.currentWeather)
         this.isWeatherCardShown = true
       } catch (error) {
         console.log(error)

@@ -89,7 +89,7 @@ export default {
       if (desiredTimeHours < 10) (desiredTimeHours = '0' + desiredTimeHours)
       if (desiredTimeMinutes < 10) (desiredTimeMinutes = '0' + desiredTimeMinutes)
 
-      console.log(desiredTimeHours + ':' + desiredTimeMinutes)
+      // console.log(desiredTimeHours + ':' + desiredTimeMinutes)
       return desiredTimeHours + ':' + desiredTimeMinutes
     }
   }
