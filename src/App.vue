@@ -20,6 +20,8 @@ import SearchBlock from './components/SearchBlock'
 import WeatherCard from './components/WeatherCard'
 import images from './assets/background-images-export.js'
 
+import { openWeatherAPIKey } from '../apikeys'
+
 export default {
   name: 'App',
   components: {
@@ -79,9 +81,8 @@ export default {
     async getWeather (city) {
       try {
         const baseURL = 'https://api.openweathermap.org/data/2.5/weather'
-        const APIKey = '4ef4b2a2a7bdeffc0eb01cf68ffe665e'
 
-        const request = await fetch(`${baseURL}?q=${city}&appid=${APIKey}`, { mode: 'cors' })
+        const request = await fetch(`${baseURL}?q=${city}&appid=${openWeatherAPIKey}`, { mode: 'cors' })
         // console.log(request)
 
         if (request.status === 404) {
@@ -121,7 +122,7 @@ export default {
         // console.log(this.currentWeather)
         this.isWeatherCardShown = true
       } catch (error) {
-        console.log(error)
+        // console.log(error)
       }
     }
   }
