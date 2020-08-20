@@ -53,7 +53,7 @@ export default {
         return this.backgroundImages.rain
       } else if (this.weatherCondition === 'Snow') {
         return this.backgroundImages.snow
-      } else if (this.weatherCondition === 'Atmosphere') {
+      } else if (this.weatherCondition === 'Mist') {
         return this.backgroundImages.atmosphere
       } else if (this.weatherCondition === 'Thunderstorm') {
         return this.backgroundImages.thunder
