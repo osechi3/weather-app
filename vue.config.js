@@ -1,4 +1,5 @@
 module.exports = {
+  publicPath: '/weather-app/',
   chainWebpack: config => {
     config
       .plugin('html')

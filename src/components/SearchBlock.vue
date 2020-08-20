@@ -43,7 +43,7 @@ export default {
 
   data () {
     return {
-      city: 'California',
+      city: '',
       isClicked: false,
       isClickedAsync: false
     }

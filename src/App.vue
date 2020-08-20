@@ -122,7 +122,7 @@ export default {
         // console.log(this.currentWeather)
         this.isWeatherCardShown = true
       } catch (error) {
-        // console.log(error)
+        console.log(error.message)
       }
     }
   }
