@@ -45,7 +45,8 @@ export default {
     return {
       city: 'California',
       isClicked: false,
-      isClickedAsync: false
+      isClickedAsync: false,
+      currentLocation: ''
     }
   },
 
@@ -62,6 +63,10 @@ export default {
     sendData () {
       if (this.validate()) {
         this.$emit('get-weather-btn-clicked', this.city)
+        this.currentLocation = this.city
+        this.city = ''
+      } else if (!this.$v.noSameText) {
+        this.city = ''
       } else {
         this.showErrorMessage()
       }
@@ -93,6 +98,9 @@ export default {
       noSymbols: value => {
         const expression = /^[a-zA-ZäöüßÄÖÜ\s]+$/g
         return expression.test(value)
+      },
+      noSameText: (value, vm) => {
+        return value !== vm.currentLocation
       }
     }
   }
