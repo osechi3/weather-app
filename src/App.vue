@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <img id="background-img" :src="backgroundImg" alt="">
+    <transition name="fade" mode="out-in">
+      <img id="background-img" :src="backgroundImg" alt="" :key="backgroundImg">
+    </transition>
     <app-search-block
       :isNotFound="isNotFound"
       :isUnknownError="isUnknownError"
@@ -8,7 +10,7 @@
     </app-search-block>
     <app-weather-card
       :currentWeather="currentWeather"
-      v-if="Object.keys(currentWeather).length !== 0">
+      v-if="isWeatherCardShown">
     </app-weather-card>
   </div>
 </template>
@@ -27,7 +29,17 @@ export default {
 
   data () {
     return {
-      currentWeather: {},
+      currentWeather: {
+        location: '',
+        humidity: '',
+        windSpeed: '',
+        temperatureKelvin: '',
+        feelsLike: '',
+        timezoneShift: '',
+        weatherDescription: '',
+        iconURL: ''
+      },
+
       weatherCondition: '',
       backgroundImages: {
         default: images[0],
@@ -38,6 +50,7 @@ export default {
         thunder: images[5]
       },
 
+      isWeatherCardShown: false,
       isNotFound: false,
       isUnknownError: false
     }
@@ -102,8 +115,11 @@ export default {
           iconURL: `http://openweathermap.org/img/wn/${requestData.weather[0].icon}@2x.png`
         }
 
+        // to change the background accordingly
         this.weatherCondition = requestData.weather[0].main
+
         console.log(this.currentWeather)
+        this.isWeatherCardShown = true
       } catch (error) {
         console.log(error)
       }
@@ -125,5 +141,13 @@ body {
 #background-img {
   position: absolute;
   width: 100%;
+}
+
+/* Animations */
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s ease-in;
 }
 </style>
