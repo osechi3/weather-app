@@ -1,1 +1,3 @@
-Initial commit
+This is a project made as a part of The Odin Project Curriculum. It's an app that gives a weather report of a particular location. The user inputs a city name then the app fetches the weather data from OpenWeather API and displays it. There are different gif backgrounds that change according to the fetched data. The app is made using Vue framework.
+
+You can see it here: https://osechi3.github.io/weather-app/
